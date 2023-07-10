@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangController;
 use Illuminate\Support\Facades\Route;
 use App\http\Controllers\HomeController;
 
@@ -17,3 +18,4 @@ use App\http\Controllers\HomeController;
 Route::get('/', function(){
     return view('dashboard');
 });
+Route::get('/barang', [BarangController::class, 'index'])-> name('barang.index');
