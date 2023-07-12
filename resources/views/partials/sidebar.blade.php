@@ -17,7 +17,7 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('barang.index') }}">Barang</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('satuan.index') }}">Satuan</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('kategori.index') }}">Kategori</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Ruangan</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('ruangan.index') }}">Ruangan</a></li>
                 </ul>
             </div>
         </li>
