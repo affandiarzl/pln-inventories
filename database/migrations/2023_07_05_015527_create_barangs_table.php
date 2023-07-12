@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('tbl_barang', function (Blueprint $table) {
             $table->id();
             $table->integer('id_kategori');
+            $table->string('kategori_brg');
             $table->string('nama_barang')->nullable();
+            $table->string('type_barang')->nullable();
             $table->integer('stok')->nullable();
-            $table->bigInteger('harga')->nullable();
+            $table->string('satuan_brg')->nullable();
             $table->timestamps();
         });
     }

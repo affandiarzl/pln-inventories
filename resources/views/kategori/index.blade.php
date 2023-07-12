@@ -11,9 +11,6 @@
                                 <th>No</th>
                                 <th>ID Kategori</th>
                                 <th>Kategori</th>
-                                <th>Nama Barang</th>
-                                <th>Stok</th>
-                                <th>Satuan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -21,18 +18,17 @@
                             <tr>
                                 <td>1</td>
                                 <td>123001</td>
-                                <td>Mouse</td>
-                                <td>Logitech G112</td>
-                                <td>12</td>
-                                <td>Unit</td>
+                                <td>Elektronik</td>
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>113001</td>
-                                <td>AC</td>
-                                <td>Daikin 12-DG</td>
-                                <td>4</td>
-                                <td>Unit</td>
+                                <td>123002</td>
+                                <td>Furniture</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>123003</td>
+                                <td>ATK</td>
                             </tr>
                         </tbody>
                     </table>
