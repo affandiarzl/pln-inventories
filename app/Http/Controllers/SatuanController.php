@@ -11,6 +11,13 @@ class SatuanController extends Controller
         $satuans = TabelSatuan::all();
         return view('satuan.index', compact('satuans'));
     }
+    public function store(Request $request) {
+        $data=$request->validate([
+            'satuan_brg'=>'required'
+        ]);
+        TabelSatuan::create($data);
+        return redirect()->route('satuan.index')->with('success', 'Anda berhasil menambahkan data!');
+    }
     public function update($id, Request $request) {
         $request->validate([
             'satuan_brg'=>'required'
@@ -19,6 +26,11 @@ class SatuanController extends Controller
         $satuan->update([
             'satuan_brg'=>$request->satuan_brg
         ]);
-        return redirect()->route('satuan.index');
+        return redirect()->route('satuan.index')->with('success', 'Anda berhasil mengedit satuan!');
+    }
+    public function delete($id) {
+        $satuan = TabelSatuan::findOrFail($id);
+        $satuan->delete();
+        return redirect()->route('satuan.index')->with('success', 'Anda berhasil menghapus satuan!');
     }
 }

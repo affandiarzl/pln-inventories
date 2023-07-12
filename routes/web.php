@@ -25,4 +25,6 @@ Route::get('/barang', [BarangController::class, 'index'])-> name('barang.index')
 Route::get('/satuan', [SatuanController::class, 'index'])-> name('satuan.index');
 Route::get('/kategori', [KategoriController::class, 'index'])-> name('kategori.index');
 Route::get('/ruangan', [RuanganController::class, 'index'])-> name('ruangan.index');
+Route::post('/store-satuan', [SatuanController::class, 'store'])-> name('satuan.store');
 Route::post('/update-satuan/{id}', [SatuanController::class, 'update'])-> name('satuan.update');
+Route::delete('/delete-satuan/{id}', [SatuanController::class, 'delete'])-> name('satuan.delete');
