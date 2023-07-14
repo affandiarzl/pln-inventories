@@ -1,33 +1,4 @@
 @extends('layouts.app')
-@push('js')
-    <script>
-        $(document).ready(function() {
-            // edit modal
-            $(`span[id^="edit-"]`).click(function(event) {
-                const id = $(this).attr("data-id");
-                const ruangan = $(this).attr("data-ruangan");
-                const editForm = $('#editFormModalRuangan');
-
-                $(document).find('#edit-ruangan').val(ruangan);
-
-                editForm.attr('action', `/update-ruangan/${id}`);
-            });
-
-            // Delete Modal
-            $(`span[id^="delete-"]`).click(function(event) {
-                const id = $(this).attr("data-id");
-                const ruangan = $(this).attr("data-ruangan");
-                const deleteForm = $('#deleteFormRuangan');
-                const modalBody = $('#deleteModalBody');
-                modalBody.html(`Apakah anda yakin ingin menghapus ${ruangan}?`);
-
-                $(document).find('#delete-ruangan').val(ruangan);
-
-                deleteForm.attr('action', `/delete-ruangan/${id}`);
-            });
-        });
-    </script>
-@endpush
 @section('content')
     @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -40,9 +11,9 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Ruangan</h4>
+                <h4 class="card-title">Barang Masuk</h4>
                 <div class="d-flex justify-content-end">
-                    <button type="button" data-toggle="modal" data-target="#tambahModalRuangan"
+                    <button type="button" data-toggle="modal" data-target="#tambahModalBarangMasuk"
                         class="btn btn-primary btn-sm"><i class="fas fa-plus mr-1"></i> Tambah
                         Data</button>
                     &nbsp;
@@ -56,26 +27,36 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Ruangan</th>
+                                <th>Kategori</th>
+                                <th>Nama Barang</th>
+                                <th>Tipe</th>
+                                <th>Jumlah</th>
+                                <th>Satuan</th>
+                                <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($ruangans as $index => $ruangan)
+                            @foreach ($barangMasuks as $index => $barangMasuk)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $ruangan->nama_ruangan }}</td>
+                                    <td>{{ $barangMasuk->nama_kategori }}</td>
+                                    <td>{{ $barangMasuk->nama_barang }}</td>
+                                    <td>{{ $barangMasuk->tipe_barang }}</td>
+                                    <td>{{ $barangMasuk->qty_masuk }}</td>
+                                    <td>{{ $barangMasuk->satuan_brg }}</td>
+                                    <td>{{ $barangMasuk->tgl_masuk }}</td>
                                     <td>
                                         <span class="badge bg-warning shadow-sm" data-toggle="modal"
-                                            data-target="#editModalRuangan" data-id="{{ $ruangan->id }}"
-                                            data-ruangan="{{ $ruangan->nama_ruangan }}" style="cursor: pointer"
-                                            id="edit-{{ $ruangan->id }}">
+                                            data-target="#editModalBarangMasuk" data-id="{{ $barangMasuk->id }}"
+                                            data-barangMasuk="{{ $barangMasuk->nama_barangMasuk }}" style="cursor: pointer"
+                                            id="edit-{{ $barangMasuk->id }}">
                                             <i class="fas fa-pencil-alt"></i>
                                         </span>
                                         <span class="badge bg-danger shadow-sm text-white" data-toggle="modal"
-                                            data-target="#deleteModalRuangan" data-id="{{ $ruangan->id }}"
-                                            data-ruangan="{{ $ruangan->nama_ruangan }}" style="cursor: pointer"
-                                            id="delete-{{ $ruangan->id }}">
+                                            data-target="#deleteModalBarangMasuk" data-id="{{ $barangMasuk->id }}"
+                                            data-barangMasuk="{{ $barangMasuk->nama_barangMasuk }}" style="cursor: pointer"
+                                            id="delete-{{ $barangMasuk->id }}">
                                             <i class="fas fa-trash-alt"></i>
                                         </span>
                                     </td>
@@ -84,25 +65,71 @@
                         </tbody>
                     </table>
                     <!-- Tambah Modal -->
-                    <div class="modal fade" id="tambahModalRuangan" tabindex="-1" aria-labelledby="tambahModalRuangan"
-                        aria-hidden="true">
+                    <div class="modal fade" id="tambahModalBarangMasuk" tabindex="-1"
+                        aria-labelledby="tambahModalBarangMasuk" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="tambahModalRuangan">Tambah Ruangan</h5>
+                                    <h5 class="modal-title" id="tambahModalBarangMasuk">Tambah Data</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form action="{{ route('ruangan.store') }}" method="POST" id="tambahFormModalRuangan">
+                                <form action="{{ route('barang-masuk.store') }}" method="POST"
+                                    id="tambahFormModalBarangMasuk">
                                     @csrf
                                     <div class="modal-body">
                                         <table class="table table-borderless">
                                             <tr>
-                                                <td>Ruangan</td>
+                                                <td>Kategori</td>
                                                 <td>
-                                                    <input type="text" class="form-control w-100 mb-3"
-                                                        name="nama_ruangan" id="edit-ruangan">
+                                                    <select class="custom-select" name="id_kategori" required>
+                                                        <option selected disabled>Pilih Kategori</option>
+                                                        @foreach ($kategoris as $kategori)
+                                                            <option value="{{ $kategori->id }}">
+                                                                {{ $kategori->nama_kategori }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nama Barang</td>
+                                                <td>
+                                                    <input type="text" class="form-control w-100 mb-3" name="nama_barang"
+                                                        required>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tipe</td>
+                                                <td>
+                                                    <input type="text" class="form-control w-100 mb-3" name="tipe_barang"
+                                                        required>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jumlah</td>
+                                                <td>
+                                                    <input type="text" class="form-control w-100 mb-3" name="qty_masuk"
+                                                        required>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Satuan</td>
+                                                <td>
+                                                    <select class="custom-select" name="id_satuan" required>
+                                                        <option selected disabled>Pilih Satuan</option>
+                                                        @foreach ($satuans as $satuan)
+                                                            <option value="{{ $satuan->id }}">
+                                                                {{ $satuan->satuan_brg }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tanggal</td>
+                                                <td>
+                                                    <input type="date" class="form-control w-100 mb-3" name="tgl_masuk"
+                                                        required>
                                                 </td>
                                             </tr>
                                         </table>
@@ -116,31 +143,32 @@
                         </div>
                     </div>
                     <!-- Edit Modal -->
-                    <div class="modal fade" id="editModalRuangan" tabindex="-1" aria-labelledby="editModalRuangan"
+                    <div class="modal fade" id="editModalBarangMasuk" tabindex="-1" aria-labelledby="editModalBarangMasuk"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="editModalRuangan">Edit Ruangan</h5>
+                                    <h5 class="modal-title" id="editModalBarangMasuk">Edit Barang Masuk</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form action="" method="POST" id="editFormModalRuangan">
+                                <form action="" method="POST" id="editFormModalBarangMasuk">
                                     @csrf
                                     <div class="modal-body">
                                         <table class="table table-borderless">
                                             <tr>
-                                                <td>Ruangan</td>
+                                                <td>Barang Masuk</td>
                                                 <td>
                                                     <input type="text" class="form-control w-100 mb-3"
-                                                        name="nama_ruangan" id="edit-ruangan">
+                                                        name="nama_barangMasuk" id="edit-barangMasuk">
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Tutup</button>
                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                     </div>
                                 </form>
@@ -148,7 +176,7 @@
                         </div>
                     </div>
                     <!-- Delete Modal -->
-                    <div class="modal fade" id="deleteModalRuangan">
+                    <div class="modal fade" id="deleteModalBarangMasuk">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -161,7 +189,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                    <form method="post" id="deleteFormRuangan">
+                                    <form method="post" id="deleteFormBarangMasuk">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger">Hapus</button>

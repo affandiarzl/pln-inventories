@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('tbl_barang', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_kategori');
-            $table->string('kategori_brg');
+            $table->foreignId('id_kategori')->constrained('tbl_kategoris');
+            $table->foreignId('id_satuan')->constrained('tabel_satuans');
+            $table->foreignId('id_ruangan')->constrained('tbl_ruangans');
             $table->string('nama_barang')->nullable();
             $table->string('type_barang')->nullable();
             $table->integer('stok')->nullable();
-            $table->string('satuan_brg')->nullable();
             $table->timestamps();
         });
     }

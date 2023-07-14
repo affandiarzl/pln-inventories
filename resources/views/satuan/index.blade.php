@@ -45,6 +45,11 @@
                     <button type="button" data-toggle="modal" data-target="#tambahModalSatuan"
                         class="btn btn-primary btn-sm"><i class="fas fa-plus mr-1"></i> Tambah
                         Data</button>
+                    &nbsp;
+                    <button type="button" data-toggle="modal" data-target="#" class="btn btn-info btn-sm text-white"><i
+                            class="fas fa-print mr-1"></i> Cetak
+                        Data
+                    </button>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover">

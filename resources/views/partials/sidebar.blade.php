@@ -30,7 +30,7 @@
             </a>
             <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Barang Masuk</a>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('barang-masuk.index') }}">Barang Masuk</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Barang Keluar</a>
                     </li>

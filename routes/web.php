@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\BarangMasukController;
 use Illuminate\Support\Facades\Route;
 use App\http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
@@ -25,6 +26,7 @@ Route::get('/barang', [BarangController::class, 'index'])-> name('barang.index')
 Route::get('/satuan', [SatuanController::class, 'index'])-> name('satuan.index');
 Route::get('/kategori', [KategoriController::class, 'index'])-> name('kategori.index');
 Route::get('/ruangan', [RuanganController::class, 'index'])-> name('ruangan.index');
+Route::get('/barang-masuk', [BarangMasukController::class, 'index'])-> name('barang-masuk.index');
 
 Route::post('/store-satuan', [SatuanController::class, 'store'])-> name('satuan.store');
 Route::post('/update-satuan/{id}', [SatuanController::class, 'update'])-> name('satuan.update');
@@ -33,3 +35,11 @@ Route::delete('/delete-satuan/{id}', [SatuanController::class, 'delete'])-> name
 Route::post('/store-kategori', [KategoriController::class, 'store'])-> name('kategori.store');
 Route::post('/update-kategori/{id}', [KategoriController::class, 'update'])-> name('kategori.update');
 Route::delete('/delete-kategori/{id}', [KategoriController::class, 'delete'])-> name('kategori.delete');
+
+Route::post('/store-ruangan', [RuanganController::class, 'store'])-> name('ruangan.store');
+Route::post('/update-ruangan/{id}', [RuanganController::class, 'update'])-> name('ruangan.update');
+Route::delete('/delete-ruangan/{id}', [RuanganController::class, 'delete'])-> name('ruangan.delete');
+
+Route::post('/store-barang-masuk', [BarangMasukController::class, 'store'])-> name('barang-masuk.store');
+Route::post('/update-barang-masuk/{id}', [BarangMasukController::class, 'update'])-> name('barang-masuk.update');
+Route::delete('/delete-barang-masuk/{id}', [BarangMasukController::class, 'delete'])-> name('barang-masuk.delete');
