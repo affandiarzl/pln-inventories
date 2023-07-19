@@ -1,4 +1,4 @@
-{{-- {{ dd($barangMasuks) }} --}}
+{{-- {{ dd($barangKeluars) }} --}}
 @extends('layouts.app')
 @push('js')
     <script>
@@ -17,14 +17,14 @@
             // Delete Modal
             $(`span[id^="delete-"]`).click(function(event) {
                 const id = $(this).attr("data-id");
-                const barangMasuk = $(this).attr("data-barangMasuk");
-                const deleteForm = $('#deleteFormBarangMasuk');
+                const barangKeluar = $(this).attr("data-barangKeluar");
+                const deleteForm = $('#deleteFormBarangKeluar');
                 const modalBody = $('#deleteModalBody');
-                modalBody.html(`Apakah anda yakin ingin menghapus ${barangMasuk}?`);
+                modalBody.html(`Apakah anda yakin ingin menghapus ${barangKeluar}?`);
 
-                $(document).find('#delete-barang-masuk').val(barangMasuk);
+                $(document).find('#delete-barang-keluar').val(barangKeluar);
 
-                deleteForm.attr('action', `/delete-barang-masuk/${id}`);
+                deleteForm.attr('action', `/delete-barang-keluar/${id}`);
             });
         });
     </script>
@@ -41,9 +41,9 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Barang Masuk</h4>
+                <h4 class="card-title">Barang Keluar</h4>
                 <div class="d-flex justify-content-end">
-                    <button type="button" data-toggle="modal" data-target="#tambahModalBarangMasuk"
+                    <button type="button" data-toggle="modal" data-target="#tambahModalBarangKeluar"
                         class="btn btn-primary btn-sm"><i class="fas fa-plus mr-1"></i> Tambah
                         Data</button>
                     &nbsp;
@@ -67,26 +67,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($barangMasuks as $index => $barangMasuk)
+                            @foreach ($barangKeluars as $index => $barangKeluar)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $barangMasuk->nama_kategori }}</td>
-                                    <td>{{ $barangMasuk->nama_barang }}</td>
-                                    <td>{{ $barangMasuk->type_barang }}</td>
-                                    <td>{{ $barangMasuk->qty_masuk }}</td>
-                                    <td>{{ $barangMasuk->satuan_brg }}</td>
-                                    <td>{{ $barangMasuk->tgl_masuk }}</td>
+                                    <td>{{ $barangKeluar->nama_kategori }}</td>
+                                    <td>{{ $barangKeluar->nama_barang }}</td>
+                                    <td>{{ $barangKeluar->type_barang }}</td>
+                                    <td>{{ $barangKeluar->qty_keluar }}</td>
+                                    <td>{{ $barangKeluar->satuan_brg }}</td>
+                                    <td>{{ $barangKeluar->tgl_keluar }}</td>
                                     <td>
                                         <span class="badge bg-warning shadow-sm" data-toggle="modal"
-                                            data-target="#editModalBarangMasuk" data-id="{{ $barangMasuk->id }}"
-                                            data-barangMasuk="{{ $barangMasuk->tipe_barang }}" style="cursor: pointer"
-                                            id="edit-{{ $barangMasuk->id }}">
+                                            data-target="#editModalBarangKeluar" data-id="{{ $barangKeluar->id }}"
+                                            data-barangKeluar="{{ $barangKeluar->tipe_barang }}" style="cursor: pointer"
+                                            id="edit-{{ $barangKeluar->id }}">
                                             <i class="fas fa-pencil-alt"></i>
                                         </span>
                                         <span class="badge bg-danger shadow-sm text-white" data-toggle="modal"
-                                            data-target="#deleteModalBarangMasuk" data-id="{{ $barangMasuk->id }}"
-                                            data-barangMasuk="{{ $barangMasuk->tipe_barang }}" style="cursor: pointer"
-                                            id="delete-{{ $barangMasuk->id }}">
+                                            data-target="#deleteModalBarangKeluar" data-id="{{ $barangKeluar->id }}"
+                                            data-barangKeluar="{{ $barangKeluar->tipe_barang }}" style="cursor: pointer"
+                                            id="delete-{{ $barangKeluar->id }}">
                                             <i class="fas fa-trash-alt"></i>
                                         </span>
                                     </td>
@@ -95,18 +95,18 @@
                         </tbody>
                     </table>
                     <!-- Tambah Modal -->
-                    <div class="modal fade" id="tambahModalBarangMasuk" tabindex="-1"
-                        aria-labelledby="tambahModalBarangMasuk" aria-hidden="true">
+                    <div class="modal fade" id="tambahModalBarangKeluar" tabindex="-1"
+                        aria-labelledby="tambahModalBarangKeluar" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="tambahModalBarangMasuk">Tambah Data</h5>
+                                    <h5 class="modal-title" id="tambahModalBarangKeluar">Tambah Data</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form action="{{ route('barang-masuk.store') }}" method="POST"
-                                    id="tambahFormModalBarangMasuk">
+                                <form action="{{ route('barang-keluar.store') }}" method="POST"
+                                    id="tambahFormModalBarangKeluar">
                                     @csrf
                                     <div class="modal-body">
                                         <table class="table table-borderless">
@@ -126,15 +126,16 @@
                                             <tr>
                                                 <td>Jumlah</td>
                                                 <td>
-                                                    <input type="text" class="form-control w-100 mb-3" name="qty_masuk"
+                                                    <input type="text" class="form-control w-100 mb-3" name="qty_keluar"
                                                         required>
                                                 </td>
                                             </tr>
-                                            <td>Tanggal</td>
-                                            <td>
-                                                <input type="date" class="form-control w-100 mb-3" name="tgl_masuk"
-                                                    required>
-                                            </td>
+                                            <tr>
+                                                <td>Tanggal</td>
+                                                <td>
+                                                    <input type="date" class="form-control w-100 mb-3" name="tgl_keluar"
+                                                        required>
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>
@@ -147,25 +148,25 @@
                         </div>
                     </div>
                     <!-- Edit Modal -->
-                    <div class="modal fade" id="editModalBarangMasuk" tabindex="-1" aria-labelledby="editModalBarangMasuk"
-                        aria-hidden="true">
+                    <div class="modal fade" id="editModalBarangKeluar" tabindex="-1"
+                        aria-labelledby="editModalBarangKeluar" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="editModalBarangMasuk">Edit Barang Masuk</h5>
+                                    <h5 class="modal-title" id="editModalBarangKeluar">Edit Barang Keluar</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form action="" method="POST" id="editFormModalBarangMasuk">
+                                <form action="" method="POST" id="editFormModalBarangKeluar">
                                     @csrf
                                     <div class="modal-body">
                                         <table class="table table-borderless">
                                             <tr>
-                                                <td>Barang Masuk</td>
+                                                <td>Barang Keluar</td>
                                                 <td>
                                                     <input type="text" class="form-control w-100 mb-3"
-                                                        name="nama_barangMasuk" id="edit-barangMasuk">
+                                                        name="nama_barangKeluar" id="edit-barangKeluar">
                                                 </td>
                                             </tr>
                                         </table>
@@ -180,7 +181,7 @@
                         </div>
                     </div>
                     <!-- Delete Modal -->
-                    <div class="modal fade" id="deleteModalBarangMasuk">
+                    <div class="modal fade" id="deleteModalBarangKeluar">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -193,7 +194,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                    <form method="post" id="deleteFormBarangMasuk">
+                                    <form method="post" id="deleteFormBarangKeluar">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger">Hapus</button>

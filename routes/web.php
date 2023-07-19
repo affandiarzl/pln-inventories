@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\BarangExtraController;
+use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\BarangMasukController;
 use Illuminate\Support\Facades\Route;
 use App\http\Controllers\HomeController;
@@ -27,6 +29,12 @@ Route::get('/satuan', [SatuanController::class, 'index'])-> name('satuan.index')
 Route::get('/kategori', [KategoriController::class, 'index'])-> name('kategori.index');
 Route::get('/ruangan', [RuanganController::class, 'index'])-> name('ruangan.index');
 Route::get('/barang-masuk', [BarangMasukController::class, 'index'])-> name('barang-masuk.index');
+Route::get('/barang-keluar', [BarangKeluarController::class, 'index'])-> name('barang-keluar.index');
+Route::get('/barang-extra', [BarangExtraController::class, 'index'])-> name('barang-extra.index');
+
+Route::post('/store-barang', [BarangController::class, 'store'])-> name('barang.store');
+Route::post('/update-barang/{id}', [BarangController::class, 'update'])-> name('barang.update');
+Route::delete('/delete-barang/{id}', [BarangController::class, 'delete'])-> name('barang.delete');
 
 Route::post('/store-satuan', [SatuanController::class, 'store'])-> name('satuan.store');
 Route::post('/update-satuan/{id}', [SatuanController::class, 'update'])-> name('satuan.update');
@@ -43,3 +51,11 @@ Route::delete('/delete-ruangan/{id}', [RuanganController::class, 'delete'])-> na
 Route::post('/store-barang-masuk', [BarangMasukController::class, 'store'])-> name('barang-masuk.store');
 Route::post('/update-barang-masuk/{id}', [BarangMasukController::class, 'update'])-> name('barang-masuk.update');
 Route::delete('/delete-barang-masuk/{id}', [BarangMasukController::class, 'delete'])-> name('barang-masuk.delete');
+
+Route::post('/store-barang-keluar', [BarangKeluarController::class, 'store'])-> name('barang-keluar.store');
+Route::post('/update-barang-keluar/{id}', [BarangKeluarController::class, 'update'])-> name('barang-keluar.update');
+Route::delete('/delete-barang-keluar/{id}', [BarangKeluarController::class, 'delete'])-> name('barang-keluar.delete');
+
+Route::post('/store-barang-extra', [BarangExtraController::class, 'store'])-> name('barang-extra.store');
+Route::post('/update-barang-extra/{id}', [BarangExtraController::class, 'update'])-> name('barang-extra.update');
+Route::delete('/delete-barang-extra/{id}', [BarangExtraController::class, 'delete'])-> name('barang-extra.delete');

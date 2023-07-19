@@ -32,13 +32,13 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link" href="{{ route('barang-masuk.index') }}">Barang Masuk</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Barang Keluar</a>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('barang-keluar.index') }}">Barang Keluar</a>
                     </li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="pages/documentation/documentation.html">
+            <a class="nav-link" href="{{ route('barang-extra.index') }}">
                 <i class="icon-paper menu-icon"></i>
                 <span class="menu-title">Barang Ekstrakomtabel</span>
             </a>

@@ -10,6 +10,7 @@ class Barang extends Model
     public $table = "tbl_barang";
 
     use HasFactory;
+    protected $guarded = ["id"];
 
     public function kategori() {
         return $this->belongsTo(Kategori::class);
@@ -17,7 +18,15 @@ class Barang extends Model
     public function satuan() {
         return $this->belongsTo(TabelSatuan::class);
     }
-    public function ruangan() {
-        return $this->belongsTo(Ruangan::class);
+    public function barangMasuk() {
+        return $this->hasMany(BarangMasuk::class, 'id_barang');
     }
+    public function barangKeluar() {
+        return $this->hasMany(BarangKeluar::class, 'id_barang');
+    }
+    // public function getStokAttribute() {
+    //     $totalMasuk = $this->barangMasuk->sum('qty_masuk');
+    //     $totalKeluar = $this->barangKeluar->sum('qty_keluar');
+    //     return $totalMasuk - $totalKeluar;
+    // }
 }

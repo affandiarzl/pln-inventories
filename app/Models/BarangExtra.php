@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Kategori;
+use App\Models\TabelSatuan;
+use App\Models\Ruangan;
 
-class BarangKeluar extends Model
+class BarangExtra extends Model
 {
-    public $table = "tbl_barang_keluar";
+    public $table = "tbl_barang_extras";
 
     use HasFactory;
     protected $guarded = ["id"];
@@ -15,11 +18,10 @@ class BarangKeluar extends Model
     public function kategori() {
         return $this->belongsTo(Kategori::class);
     }
-
     public function satuan() {
         return $this->belongsTo(TabelSatuan::class);
     }
-    public function barang() {
-        return $this->belongsTo(Barang::class, 'id_barang');
+    public function ruangan() {
+        return $this->belongsTo(Ruangan::class);
     }
 }
