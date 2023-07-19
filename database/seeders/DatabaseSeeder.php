@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Barang;
 use App\Models\Kategori;
+use App\Models\Ruangan;
 use App\Models\TabelSatuan;
 use Illuminate\Database\Seeder;
 
@@ -28,11 +29,23 @@ class DatabaseSeeder extends Seeder
             'nama_kategori'=>'ATK',
         ]);
         Kategori::create([
-            'nama_kategori'=>'Furnitur',
+            'nama_kategori'=>'Elektronik',
         ]);
 
         TabelSatuan::create([
             'satuan_brg'=>'Lusin',
+        ]);
+
+        TabelSatuan::create([
+            'satuan_brg'=>'Unit',
+        ]);
+
+        Ruangan::create([
+            'nama_ruangan'=>'Fasop',
+        ]);
+
+        Ruangan::create([
+            'nama_ruangan'=>'KSA',
         ]);
 
         Barang::create([
@@ -41,6 +54,15 @@ class DatabaseSeeder extends Seeder
             'id_barang'=>'BRG-001',
             'nama_barang'=>'Pulpen',
             'type_barang'=>'Standart-SMA',
+            'stok'=>'0',
+        ]);
+
+        Barang::create([
+            'id_kategori'=>2,
+            'id_satuan'=>2,
+            'id_barang'=>'BRG-002',
+            'nama_barang'=>'Monitor',
+            'type_barang'=>'Asus-4K',
             'stok'=>'0',
         ]);
     }

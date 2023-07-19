@@ -4,22 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\BarangKeluar;
+use App\Models\Ruangan;
 use Illuminate\Http\Request;
 
 class BarangKeluarController extends Controller
 {
     public function index() {
         $barangs = Barang::get();
-        $barangKeluars = BarangKeluar::with(['kategori', 'satuan'])
-        ->join('tbl_barang', 'tbl_barang_keluar.id_barang', '=', 'tbl_barang.id')
-        ->join('tbl_kategoris', 'tbl_barang.id_kategori', '=', 'tbl_kategoris.id')
-        ->join('tabel_satuans', 'tbl_barang.id_satuan', '=', 'tabel_satuans.id')
+        $ruangans = Ruangan::get();
+        $barangKeluars = BarangKeluar::with(['barang', 'ruangan'])
         ->get();
-        return view('barang_keluar.index', compact('barangKeluars', 'barangs'));
+        return view('barang_keluar.index', compact('barangKeluars', 'barangs', 'ruangans'));
     }
     public function store(Request $request) {
         $data=$request->validate([
             'id_barang'=>'required',
+            'id_ruangan'=>'nullable',
             'qty_keluar'=>'required',
             'tgl_keluar'=>'required',
         ]);

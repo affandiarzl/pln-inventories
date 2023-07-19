@@ -24,4 +24,7 @@ class BarangExtra extends Model
     public function ruangan() {
         return $this->belongsTo(Ruangan::class);
     }
+    public function barang() {
+        return $this->belongsTo(Barang::class, 'id_barang');
+    }
 }

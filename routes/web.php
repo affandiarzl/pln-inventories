@@ -5,7 +5,6 @@ use App\Http\Controllers\BarangExtraController;
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\BarangMasukController;
 use Illuminate\Support\Facades\Route;
-use App\http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\SatuanController;

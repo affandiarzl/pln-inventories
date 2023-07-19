@@ -1,4 +1,33 @@
 @extends('layouts.app')
+@push('js')
+    <script>
+        $(document).ready(function() {
+            // edit modal
+            // $(`span[id^="edit-"]`).click(function(event) {
+            //     const id = $(this).attr("data-id");
+            //     const kategori = $(this).attr("data-kategori");
+            //     const editForm = $('#editFormModalKategori');
+
+            //     $(document).find('#edit-kategori').val(kategori);
+
+            //     editForm.attr('action', `/update-kategori/${id}`);
+            // });
+
+            // Delete Modal
+            $(`span[id^="delete-"]`).click(function(event) {
+                const id = $(this).attr("data-id");
+                const barang = $(this).attr("data-barang");
+                const deleteForm = $('#deleteFormBarang');
+                const modalBody = $('#deleteModalBody');
+                modalBody.html(`Apakah anda yakin ingin menghapus ${barang}?`);
+
+                $(document).find('#delete-barang').val(barang);
+
+                deleteForm.attr('action', `/delete-barang/${id}`);
+            });
+        });
+    </script>
+@endpush
 @section('content')
     @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -41,11 +70,11 @@
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $barang->id_barang }}</td>
-                                    <td>{{ $barang->nama_kategori }}</td>
+                                    <td>{{ $barang->kategori->nama_kategori }}</td>
                                     <td>{{ $barang->nama_barang }}</td>
                                     <td>{{ $barang->type_barang }}</td>
                                     <td>{{ $barang->stok }}</td>
-                                    <td>{{ $barang->satuan_brg }}</td>
+                                    <td>{{ $barang->satuan->satuan_brg }}</td>
                                     <td>
                                         <span class="badge bg-warning shadow-sm" data-toggle="modal"
                                             data-target="#editModalBarang" data-id="{{ $barang->id }}"

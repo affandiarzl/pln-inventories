@@ -15,9 +15,6 @@ class BarangController extends Controller
         $kategoris = Kategori::get();
         $satuans = TabelSatuan::get();
         $barangs = Barang::with(['kategori', 'satuan'])
-        ->join('tbl_kategoris', 'tbl_barang.id_kategori', '=', 'tbl_kategoris.id')
-        ->join('tabel_satuans', 'tbl_barang.id_satuan', '=', 'tabel_satuans.id')
-        ->select('tbl_barang.*', 'tbl_kategoris.nama_kategori', 'tabel_satuans.satuan_brg')
         ->get();
         $barangs = $barangs->map(function ($barang) {
             $barangMasuk = BarangMasuk::where('id_barang', $barang->id)->sum('qty_masuk');
@@ -35,7 +32,7 @@ class BarangController extends Controller
         $data=$request->validate([
             'id_kategori'=>'required',
             'id_satuan'=>'required',
-            'id_barang'=>'required',
+            'id_barang'=>'nullable',
             'nama_barang'=>'required',
             'type_barang'=>'required',
             'stok'=>'required',

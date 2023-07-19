@@ -13,10 +13,10 @@ class Barang extends Model
     protected $guarded = ["id"];
 
     public function kategori() {
-        return $this->belongsTo(Kategori::class);
+        return $this->belongsTo(Kategori::class, 'id_kategori');
     }
     public function satuan() {
-        return $this->belongsTo(TabelSatuan::class);
+        return $this->belongsTo(TabelSatuan::class, 'id_satuan');
     }
     public function barangMasuk() {
         return $this->hasMany(BarangMasuk::class, 'id_barang');

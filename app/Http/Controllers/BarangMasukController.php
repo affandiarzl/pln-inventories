@@ -10,11 +10,7 @@ class BarangMasukController extends Controller
 {
     public function index() {
         $barangs = Barang::get();
-        $barangMasuks = BarangMasuk::with(['kategori', 'satuan'])
-        ->join('tbl_barang', 'tbl_barang_masuk.id_barang', '=', 'tbl_barang.id')
-        ->join('tbl_kategoris', 'tbl_barang.id_kategori', '=', 'tbl_kategoris.id')
-        ->join('tabel_satuans', 'tbl_barang.id_satuan', '=', 'tabel_satuans.id')
-        ->select('tbl_barang_masuk.*', 'tbl_barang.*', 'tbl_kategoris.nama_kategori', 'tabel_satuans.satuan_brg')
+        $barangMasuks = BarangMasuk::with(['barang'])
         ->get();
         return view('barang_masuk.index', compact('barangMasuks', 'barangs'));
     }
@@ -30,7 +26,18 @@ class BarangMasukController extends Controller
         // $barang->save();
         return redirect()->route('barang-masuk.index')->with('success', 'Anda berhasil menambahkan data!');
     }
-
+    public function update($id, Request $request) {
+        $data=$request->validate([
+            'id_barang'=>'required',
+            'qty_masuk'=>'required',
+            'tgl_masuk'=>'required',
+        ]);
+        $barangMasuk = BarangMasuk::findOrFail($id);
+        $barangMasuk->update(
+            $data
+        );
+        return redirect()->route('barang-masuk.index')->with('success', 'Anda berhasil mengedit data!');
+    }
     public function delete($id) {
         $barangMasuk = BarangMasuk::findOrFail($id);
         $barangMasuk->delete();

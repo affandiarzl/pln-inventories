@@ -14,7 +14,6 @@
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('barang.index') }}">Barang</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('satuan.index') }}">Satuan</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('kategori.index') }}">Kategori</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('ruangan.index') }}">Ruangan</a></li>
@@ -22,10 +21,16 @@
             </div>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('barang.index') }}">
+                <i class="icon-paper menu-icon"></i>
+                <span class="menu-title">Data Barang</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
                 aria-controls="form-elements">
                 <i class="icon-columns menu-icon"></i>
-                <span class="menu-title">ATK</span>
+                <span class="menu-title">Riwayat</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="form-elements">
@@ -37,12 +42,12 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="{{ route('barang-extra.index') }}">
                 <i class="icon-paper menu-icon"></i>
                 <span class="menu-title">Barang Ekstrakomtabel</span>
             </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
             <a class="nav-link" href="pages/documentation/documentation.html">
                 <i class="icon-head menu-icon"></i>

@@ -43,7 +43,7 @@
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $barangExtra->nama_kategori }}</td>
                                     <td>{{ $barangExtra->nama_barang }}</td>
-                                    <td>{{ $barangExtra->tipe_barang }}</td>
+                                    <td>{{ $barangExtra->type_barang }}</td>
                                     <td>{{ $barangExtra->qty_masuk }}</td>
                                     <td>{{ $barangExtra->satuan_brg }}</td>
                                     <td>{{ $barangExtra->nama_ruangan }}</td>
@@ -83,29 +83,17 @@
                                     <div class="modal-body">
                                         <table class="table table-borderless">
                                             <tr>
-                                                <td>Kategori</td>
+                                            <tr>
+                                                <td>ID Barang</td>
                                                 <td>
-                                                    <select class="custom-select" name="id_kategori" required>
-                                                        <option selected disabled>Pilih Kategori</option>
-                                                        @foreach ($kategoris as $kategori)
-                                                            <option value="{{ $kategori->id }}">
-                                                                {{ $kategori->nama_kategori }}</option>
+                                                    <select class="custom-select" name="id_barang" required>
+                                                        <option selected disabled>Pilih ID Barang</option>
+                                                        @foreach ($barangs as $barang)
+                                                            <option value="{{ $barang->id }}">
+                                                                {{ $barang->id_barang }} - {{ $barang->nama_barang }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Nama Barang</td>
-                                                <td>
-                                                    <input type="text" class="form-control w-100 mb-3" name="nama_barang"
-                                                        required>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tipe</td>
-                                                <td>
-                                                    <input type="text" class="form-control w-100 mb-3" name="tipe_barang"
-                                                        required>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -116,22 +104,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Satuan</td>
-                                                <td>
-                                                    <select class="custom-select" name="id_satuan" required>
-                                                        <option selected disabled>Pilih Satuan</option>
-                                                        @foreach ($satuans as $satuan)
-                                                            <option value="{{ $satuan->id }}">
-                                                                {{ $satuan->satuan_brg }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
                                                 <td>Ruangan</td>
                                                 <td>
                                                     <select class="custom-select" name="id_ruangan" required>
-                                                        <option selected disabled>Pilih Satuan</option>
+                                                        <option selected disabled>Pilih Ruangan</option>
                                                         @foreach ($ruangans as $ruangan)
                                                             <option value="{{ $ruangan->id }}">
                                                                 {{ $ruangan->nama_ruangan }}</option>

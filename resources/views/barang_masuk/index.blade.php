@@ -4,15 +4,19 @@
     <script>
         $(document).ready(function() {
             // edit modal
-            // $(`span[id^="edit-"]`).click(function(event) {
-            //     const id = $(this).attr("data-id");
-            //     const kategori = $(this).attr("data-kategori");
-            //     const editForm = $('#editFormModalKategori');
+            $(`span[id^="edit-"]`).click(function(event) {
+                const id = $(this).attr("data-id");
+                const barangMasuk = $(this).attr("data-barangMasuk");
+                const qtyMasuk = $(this).attr("data-qty-masuk");
+                const tglMasuk = $(this).attr("data-tgl-masuk");
+                const editForm = $('#editFormModalBarangMasuk');
 
-            //     $(document).find('#edit-kategori').val(kategori);
+                
+                $(document).find('#qty_masuk').val(qtyMasuk);
+                $(document).find('#tgl_masuk').val(tglMasuk);
 
-            //     editForm.attr('action', `/update-kategori/${id}`);
-            // });
+                editForm.attr('action', `/update-barang-masuk/${id}`);
+            });
 
             // Delete Modal
             $(`span[id^="delete-"]`).click(function(event) {
@@ -70,23 +74,25 @@
                             @foreach ($barangMasuks as $index => $barangMasuk)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $barangMasuk->nama_kategori }}</td>
-                                    <td>{{ $barangMasuk->nama_barang }}</td>
-                                    <td>{{ $barangMasuk->type_barang }}</td>
+                                    <td>{{ $barangMasuk->barang->kategori->nama_kategori }}</td>
+                                    <td>{{ $barangMasuk->barang->nama_barang }}</td>
+                                    <td>{{ $barangMasuk->barang->type_barang }}</td>
                                     <td>{{ $barangMasuk->qty_masuk }}</td>
-                                    <td>{{ $barangMasuk->satuan_brg }}</td>
+                                    <td>{{ $barangMasuk->barang->satuan->satuan_brg }}</td>
                                     <td>{{ $barangMasuk->tgl_masuk }}</td>
                                     <td>
                                         <span class="badge bg-warning shadow-sm" data-toggle="modal"
                                             data-target="#editModalBarangMasuk" data-id="{{ $barangMasuk->id }}"
-                                            data-barangMasuk="{{ $barangMasuk->tipe_barang }}" style="cursor: pointer"
+                                            data-barangMasuk="{{ $barangMasuk->barang->type_barang }}"
+                                            data-qty-masuk="{{ $barangMasuk->qty_masuk }}"
+                                            data-tgl-masuk="{{ $barangMasuk->tgl_masuk }}" style="cursor: pointer"
                                             id="edit-{{ $barangMasuk->id }}">
                                             <i class="fas fa-pencil-alt"></i>
                                         </span>
                                         <span class="badge bg-danger shadow-sm text-white" data-toggle="modal"
                                             data-target="#deleteModalBarangMasuk" data-id="{{ $barangMasuk->id }}"
-                                            data-barangMasuk="{{ $barangMasuk->tipe_barang }}" style="cursor: pointer"
-                                            id="delete-{{ $barangMasuk->id }}">
+                                            data-barangMasuk="{{ $barangMasuk->barang->type_barang }}"
+                                            style="cursor: pointer" id="delete-{{ $barangMasuk->id }}">
                                             <i class="fas fa-trash-alt"></i>
                                         </span>
                                     </td>
@@ -162,11 +168,30 @@
                                     <div class="modal-body">
                                         <table class="table table-borderless">
                                             <tr>
-                                                <td>Barang Masuk</td>
+                                                <td>ID Barang</td>
+                                                <td>
+                                                    <select class="custom-select" name="id_barang" id="id_barang" required>
+                                                        <option selected disabled>Pilih ID Barang</option>
+                                                        @foreach ($barangs as $barang)
+                                                            <option value="{{ $barang->id }}">
+                                                                {{ $barang->id_barang }} - {{ $barang->nama_barang }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jumlah</td>
                                                 <td>
                                                     <input type="text" class="form-control w-100 mb-3"
-                                                        name="nama_barangMasuk" id="edit-barangMasuk">
+                                                        name="qty_masuk" id="qty_masuk" required>
                                                 </td>
+                                            </tr>
+                                            <td>Tanggal</td>
+                                            <td>
+                                                <input type="date" class="form-control w-100 mb-3" name="tgl_masuk"
+                                                    id="tgl_masuk" required>
+                                            </td>
                                             </tr>
                                         </table>
                                     </div>

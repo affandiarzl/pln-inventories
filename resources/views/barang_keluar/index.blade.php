@@ -62,6 +62,7 @@
                                 <th>Tipe</th>
                                 <th>Jumlah</th>
                                 <th>Satuan</th>
+                                <th>Ruangan</th>
                                 <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
@@ -70,23 +71,24 @@
                             @foreach ($barangKeluars as $index => $barangKeluar)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $barangKeluar->nama_kategori }}</td>
-                                    <td>{{ $barangKeluar->nama_barang }}</td>
-                                    <td>{{ $barangKeluar->type_barang }}</td>
+                                    <td>{{ $barangKeluar->barang->kategori->nama_kategori }}</td>
+                                    <td>{{ $barangKeluar->barang->nama_barang }}</td>
+                                    <td>{{ $barangKeluar->barang->type_barang }}</td>
                                     <td>{{ $barangKeluar->qty_keluar }}</td>
-                                    <td>{{ $barangKeluar->satuan_brg }}</td>
+                                    <td>{{ $barangKeluar->barang->satuan->satuan_brg }}</td>
+                                    <td>{{ $barangKeluar->ruangan->nama_ruangan }}</td>
                                     <td>{{ $barangKeluar->tgl_keluar }}</td>
                                     <td>
                                         <span class="badge bg-warning shadow-sm" data-toggle="modal"
                                             data-target="#editModalBarangKeluar" data-id="{{ $barangKeluar->id }}"
-                                            data-barangKeluar="{{ $barangKeluar->tipe_barang }}" style="cursor: pointer"
-                                            id="edit-{{ $barangKeluar->id }}">
+                                            data-barangKeluar="{{ $barangKeluar->barang->type_barang }}"
+                                            style="cursor: pointer" id="edit-{{ $barangKeluar->id }}">
                                             <i class="fas fa-pencil-alt"></i>
                                         </span>
                                         <span class="badge bg-danger shadow-sm text-white" data-toggle="modal"
                                             data-target="#deleteModalBarangKeluar" data-id="{{ $barangKeluar->id }}"
-                                            data-barangKeluar="{{ $barangKeluar->tipe_barang }}" style="cursor: pointer"
-                                            id="delete-{{ $barangKeluar->id }}">
+                                            data-barangKeluar="{{ $barangKeluar->barang->type_barang }}"
+                                            style="cursor: pointer" id="delete-{{ $barangKeluar->id }}">
                                             <i class="fas fa-trash-alt"></i>
                                         </span>
                                     </td>
@@ -128,6 +130,18 @@
                                                 <td>
                                                     <input type="text" class="form-control w-100 mb-3" name="qty_keluar"
                                                         required>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ruangan</td>
+                                                <td>
+                                                    <select class="custom-select" name="id_ruangan" required>
+                                                        <option selected disabled>Pilih Ruangan</option>
+                                                        @foreach ($ruangans as $ruangan)
+                                                            <option value="{{ $ruangan->id }}">
+                                                                {{ $ruangan->nama_ruangan }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>

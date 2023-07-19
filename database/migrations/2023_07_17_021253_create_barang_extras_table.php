@@ -15,11 +15,8 @@ return new class extends Migration
     {
         Schema::create('tbl_barang_extras', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_kategori')->constrained('tbl_kategoris');
-            $table->foreignId('id_satuan')->constrained('tabel_satuans');
+            $table->foreignId('id_barang')->constrained('tbl_barang');
             $table->foreignId('id_ruangan')->constrained('tbl_ruangans');
-            $table->string('nama_barang');
-            $table->string('tipe_barang');
             $table->integer('qty_masuk');
             $table->date('tgl_masuk');
             $table->timestamps();
