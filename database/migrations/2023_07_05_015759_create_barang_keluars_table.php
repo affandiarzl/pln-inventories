@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('tbl_barang_keluar', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_barang')->constrained('tbl_barang');
-            $table->foreignId('id_ruangan')->constrained('tbl_ruangans')->nullable();
             $table->integer('qty_keluar');
             $table->date('tgl_keluar');
             $table->timestamps();

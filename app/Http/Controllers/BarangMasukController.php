@@ -4,19 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\BarangMasuk;
+use App\Models\Ruangan;
 use Illuminate\Http\Request;
 
 class BarangMasukController extends Controller
 {
     public function index() {
         $barangs = Barang::get();
-        $barangMasuks = BarangMasuk::with(['barang'])
+        $ruangans = Ruangan::get();
+        $barangMasuks = BarangMasuk::with(['barang', 'ruangan'])
         ->get();
-        return view('barang_masuk.index', compact('barangMasuks', 'barangs'));
+        return view('barang_masuk.index', compact('barangMasuks', 'barangs', 'ruangans'));
     }
     public function store(Request $request) {
         $data=$request->validate([
             'id_barang'=>'required',
+            'id_ruangan'=>'nullable',
             'qty_masuk'=>'required',
             'tgl_masuk'=>'required',
         ]);
@@ -29,6 +32,7 @@ class BarangMasukController extends Controller
     public function update($id, Request $request) {
         $data=$request->validate([
             'id_barang'=>'required',
+            'id_ruangan'=>'nullable',
             'qty_masuk'=>'required',
             'tgl_masuk'=>'required',
         ]);

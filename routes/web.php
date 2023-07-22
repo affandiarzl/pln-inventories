@@ -34,6 +34,7 @@ Route::get('/barang-extra', [BarangExtraController::class, 'index'])-> name('bar
 Route::post('/store-barang', [BarangController::class, 'store'])-> name('barang.store');
 Route::post('/update-barang/{id}', [BarangController::class, 'update'])-> name('barang.update');
 Route::delete('/delete-barang/{id}', [BarangController::class, 'delete'])-> name('barang.delete');
+Route::get('/export-barang', [BarangController::class, 'exportBarang'])-> name('barang.export');
 
 Route::post('/store-satuan', [SatuanController::class, 'store'])-> name('satuan.store');
 Route::post('/update-satuan/{id}', [SatuanController::class, 'update'])-> name('satuan.update');

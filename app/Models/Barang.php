@@ -24,9 +24,4 @@ class Barang extends Model
     public function barangKeluar() {
         return $this->hasMany(BarangKeluar::class, 'id_barang');
     }
-    // public function getStokAttribute() {
-    //     $totalMasuk = $this->barangMasuk->sum('qty_masuk');
-    //     $totalKeluar = $this->barangKeluar->sum('qty_keluar');
-    //     return $totalMasuk - $totalKeluar;
-    // }
 }

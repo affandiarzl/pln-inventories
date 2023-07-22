@@ -2,16 +2,22 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            // edit modal
-            // $(`span[id^="edit-"]`).click(function(event) {
-            //     const id = $(this).attr("data-id");
-            //     const kategori = $(this).attr("data-kategori");
-            //     const editForm = $('#editFormModalKategori');
+            edit modal
+            $(`span[id^="edit-"]`).click(function(event) {
+                const id = $(this).attr("data-id");
+                const idBarang = $(this).attr("data-id-arang");
+                const namaBarang = $(this).attr("data-nama-barang");
+                const typeBarang = $(this).attr("data-type-barang");
+                const stok = $(this).attr("data-stok");
+                const editForm = $('#editFormModalBarang');
 
-            //     $(document).find('#edit-kategori').val(kategori);
+                $(document).find('#id_barang').val(idBarang);
+                $(document).find('#nama_barang').val(namaBarang);
+                $(document).find('#type_barang').val(typeBarang);
+                $(document).find('#stok').val(stok);
 
-            //     editForm.attr('action', `/update-kategori/${id}`);
-            // });
+                editForm.attr('action', `/update-barang/${id}`);
+            });
 
             // Delete Modal
             $(`span[id^="delete-"]`).click(function(event) {
@@ -50,6 +56,11 @@
                             class="fas fa-print mr-1"></i> Cetak
                         Data
                     </button>
+                    &nbsp;
+                    <a href="{{ route('barang.export') }}" class="btn btn-export btn-sm text-white"><i
+                            class="fas fa-download mr-1"></i> Export
+                        Data
+                    </a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover">
@@ -78,8 +89,10 @@
                                     <td>
                                         <span class="badge bg-warning shadow-sm" data-toggle="modal"
                                             data-target="#editModalBarang" data-id="{{ $barang->id }}"
-                                            data-barang="{{ $barang->type_barang }}" style="cursor: pointer"
-                                            id="edit-{{ $barang->id }}">
+                                            data-id-barang="{{ $barang->id_barang }}"
+                                            data-nama-barang="{{ $barang->nama_barang }}"
+                                            data-type-barang="{{ $barang->type_barang }}" data-stok="{{ $barang->stok }}"
+                                            style="cursor: pointer" id="edit-{{ $barang->id }}">
                                             <i class="fas fa-pencil-alt"></i>
                                         </span>
                                         <span class="badge bg-danger shadow-sm text-white" data-toggle="modal"
@@ -112,7 +125,8 @@
                                                 <td>Kategori</td>
                                                 <td>
                                                     <select class="custom-select" name="id_kategori" required>
-                                                        <option selected disabled>Pilih Kategori</option>
+                                                        <option selected disabled style="color:#B2B1B9">Pilih Kategori
+                                                        </option>
                                                         @foreach ($kategoris as $kategori)
                                                             <option value="{{ $kategori->id }}">
                                                                 {{ $kategori->nama_kategori }}</option>
@@ -152,7 +166,8 @@
                                                 <td>Satuan</td>
                                                 <td>
                                                     <select class="custom-select" name="id_satuan" required>
-                                                        <option selected disabled>Pilih Satuan</option>
+                                                        <option selected disabled style="color:#B2B1B9">Pilih Satuan
+                                                        </option>
                                                         @foreach ($satuans as $satuan)
                                                             <option value="{{ $satuan->id }}">
                                                                 {{ $satuan->satuan_brg }}</option>
@@ -186,10 +201,59 @@
                                     <div class="modal-body">
                                         <table class="table table-borderless">
                                             <tr>
-                                                <td>Barang </td>
+                                                <td>Kategori</td>
+                                                <td>
+                                                    <select class="custom-select" name="id_kategori" id="id_kategori"
+                                                        required>
+                                                        <option selected disabled style="color:#B2B1B9">Pilih Kategori
+                                                        </option>
+                                                        @foreach ($kategoris as $kategori)
+                                                            <option value="{{ $kategori->id }}">
+                                                                {{ $kategori->nama_kategori }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>ID Barang</td>
                                                 <td>
                                                     <input type="text" class="form-control w-100 mb-3"
-                                                        name="nama_barang" id="edit-barang">
+                                                        name="id_barang" id="id_barang" required>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nama Barang</td>
+                                                <td>
+                                                    <input type="text" class="form-control w-100 mb-3"
+                                                        name="nama_barang" id="nama_barang" required>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tipe</td>
+                                                <td>
+                                                    <input type="text" class="form-control w-100 mb-3"
+                                                        name="type_barang" id="type_barang" required>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total Stok</td>
+                                                <td>
+                                                    <input type="text" class="form-control w-100 mb-3" name="stok"
+                                                        id="stok" required>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Satuan</td>
+                                                <td>
+                                                    <select class="custom-select" name="id_satuan" id="id_satuan"
+                                                        required>
+                                                        <option selected disabled style="color:#B2B1B9">Pilih Satuan
+                                                        </option>
+                                                        @foreach ($satuans as $satuan)
+                                                            <option value="{{ $satuan->id }}">
+                                                                {{ $satuan->satuan_brg }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                             </tr>
                                         </table>

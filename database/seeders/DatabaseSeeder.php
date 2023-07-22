@@ -28,8 +28,13 @@ class DatabaseSeeder extends Seeder
         Kategori::create([
             'nama_kategori'=>'ATK',
         ]);
+
         Kategori::create([
             'nama_kategori'=>'Elektronik',
+        ]);
+
+        Kategori::create([
+            'nama_kategori'=>'Furnitur',
         ]);
 
         TabelSatuan::create([
@@ -38,6 +43,10 @@ class DatabaseSeeder extends Seeder
 
         TabelSatuan::create([
             'satuan_brg'=>'Unit',
+        ]);
+
+        Ruangan::create([
+            'nama_ruangan'=>'-',
         ]);
 
         Ruangan::create([
@@ -63,6 +72,15 @@ class DatabaseSeeder extends Seeder
             'id_barang'=>'BRG-002',
             'nama_barang'=>'Monitor',
             'type_barang'=>'Asus-4K',
+            'stok'=>'0',
+        ]);
+
+        Barang::create([
+            'id_kategori'=>3,
+            'id_satuan'=>2,
+            'id_barang'=>'BRG-003',
+            'nama_barang'=>'Meja',
+            'type_barang'=>'180x100 cm',
             'stok'=>'0',
         ]);
     }

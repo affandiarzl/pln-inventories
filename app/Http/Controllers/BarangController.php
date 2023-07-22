@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BarangExport;
 use App\Models\Barang;
 use App\Models\BarangKeluar;
 use App\Models\BarangMasuk;
 use App\Models\Kategori;
 use App\Models\TabelSatuan;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BarangController extends Controller
 {
@@ -32,7 +34,7 @@ class BarangController extends Controller
         $data=$request->validate([
             'id_kategori'=>'required',
             'id_satuan'=>'required',
-            'id_barang'=>'nullable',
+            'id_barang'=>'required',
             'nama_barang'=>'required',
             'type_barang'=>'required',
             'stok'=>'required',
@@ -41,9 +43,29 @@ class BarangController extends Controller
         return redirect()->route('barang.index')->with('success', 'Anda berhasil menambahkan data!');
     }
 
+    public function update($id, Request $request) {
+        $data=$request->validate([
+            'id_kategori'=>'required',
+            'id_satuan'=>'required',
+            'id_barang'=>'required',
+            'nama_barang'=>'required',
+            'type_barang'=>'required',
+            'stok'=>'required',
+        ]);
+        $barang = Barang::findOrFail($id);
+        $barang->update(
+            $data
+        );
+        return redirect()->route('barang.index')->with('success', 'Anda berhasil mengedit data!');
+    }
+
     public function delete($id) {
         $barang = Barang::findOrFail($id);
         $barang->delete();
         return redirect()->route('barang.index')->with('success', 'Anda berhasil menghapus data!');
+    }
+
+    public function exportBarang() {
+        return Excel::download(new BarangExport, 'barang.xlsx');
     }
 }

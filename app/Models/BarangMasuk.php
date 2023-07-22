@@ -20,6 +20,9 @@ class BarangMasuk extends Model
     public function satuan() {
         return $this->belongsTo(TabelSatuan::class);
     }
+    public function ruangan() {
+        return $this->belongsTo(Ruangan::class,'id_ruangan');
+    }
     public function barang() {
         return $this->belongsTo(Barang::class, 'id_barang');
     }

@@ -4,15 +4,19 @@
     <script>
         $(document).ready(function() {
             // edit modal
-            // $(`span[id^="edit-"]`).click(function(event) {
-            //     const id = $(this).attr("data-id");
-            //     const kategori = $(this).attr("data-kategori");
-            //     const editForm = $('#editFormModalKategori');
+            $(`span[id^="edit-"]`).click(function(event) {
+                const id = $(this).attr("data-id");
+                const barangKeluar = $(this).attr("data-barangKeluar");
+                const qtyKeluar = $(this).attr("data-qty-keluar");
+                const tglKeluar = $(this).attr("data-tgl-keluar");
+                const editForm = $('#editFormModalBarangKeluar');
 
-            //     $(document).find('#edit-kategori').val(kategori);
 
-            //     editForm.attr('action', `/update-kategori/${id}`);
-            // });
+                $(document).find('#qty_keluar').val(qtyKeluar);
+                $(document).find('#tgl_keluar').val(tglKeluar);
+
+                editForm.attr('action', `/update-barang-keluar/${id}`);
+            });
 
             // Delete Modal
             $(`span[id^="delete-"]`).click(function(event) {
@@ -62,7 +66,6 @@
                                 <th>Tipe</th>
                                 <th>Jumlah</th>
                                 <th>Satuan</th>
-                                <th>Ruangan</th>
                                 <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
@@ -76,13 +79,14 @@
                                     <td>{{ $barangKeluar->barang->type_barang }}</td>
                                     <td>{{ $barangKeluar->qty_keluar }}</td>
                                     <td>{{ $barangKeluar->barang->satuan->satuan_brg }}</td>
-                                    <td>{{ $barangKeluar->ruangan->nama_ruangan }}</td>
                                     <td>{{ $barangKeluar->tgl_keluar }}</td>
                                     <td>
                                         <span class="badge bg-warning shadow-sm" data-toggle="modal"
                                             data-target="#editModalBarangKeluar" data-id="{{ $barangKeluar->id }}"
                                             data-barangKeluar="{{ $barangKeluar->barang->type_barang }}"
-                                            style="cursor: pointer" id="edit-{{ $barangKeluar->id }}">
+                                            data-qty-keluar="{{ $barangKeluar->qty_keluar }}"
+                                            data-tgl-keluar="{{ $barangKeluar->tgl_keluar }}" style="cursor: pointer"
+                                            id="edit-{{ $barangKeluar->id }}">
                                             <i class="fas fa-pencil-alt"></i>
                                         </span>
                                         <span class="badge bg-danger shadow-sm text-white" data-toggle="modal"
@@ -116,7 +120,9 @@
                                                 <td>ID Barang</td>
                                                 <td>
                                                     <select class="custom-select" name="id_barang" required>
-                                                        <option selected disabled>Pilih ID Barang</option>
+                                                        <option selected disabled style="color:#B2B1B9">Pilih ID
+                                                            Barang
+                                                        </option>
                                                         @foreach ($barangs as $barang)
                                                             <option value="{{ $barang->id }}">
                                                                 {{ $barang->id_barang }} - {{ $barang->nama_barang }}
@@ -130,18 +136,6 @@
                                                 <td>
                                                     <input type="text" class="form-control w-100 mb-3" name="qty_keluar"
                                                         required>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ruangan</td>
-                                                <td>
-                                                    <select class="custom-select" name="id_ruangan" required>
-                                                        <option selected disabled>Pilih Ruangan</option>
-                                                        @foreach ($ruangans as $ruangan)
-                                                            <option value="{{ $ruangan->id }}">
-                                                                {{ $ruangan->nama_ruangan }}</option>
-                                                        @endforeach
-                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -177,10 +171,31 @@
                                     <div class="modal-body">
                                         <table class="table table-borderless">
                                             <tr>
-                                                <td>Barang Keluar</td>
+                                                <td>ID Barang</td>
+                                                <td>
+                                                    <select class="custom-select" name="id_barang" required>
+                                                        <option selected disabled style="color:#B2B1B9">Pilih ID Barang
+                                                        </option>
+                                                        @foreach ($barangs as $barang)
+                                                            <option value="{{ $barang->id }}">
+                                                                {{ $barang->id_barang }} - {{ $barang->nama_barang }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jumlah</td>
                                                 <td>
                                                     <input type="text" class="form-control w-100 mb-3"
-                                                        name="nama_barangKeluar" id="edit-barangKeluar">
+                                                        name="qty_keluar" id="qty_keluar" required>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tanggal</td>
+                                                <td>
+                                                    <input type="date" class="form-control w-100 mb-3"
+                                                        name="tgl_keluar" id="tgl_keluar" required>
                                                 </td>
                                             </tr>
                                         </table>
