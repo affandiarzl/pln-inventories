@@ -2,7 +2,7 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            edit modal
+            // edit modal
             $(`span[id^="edit-"]`).click(function(event) {
                 const id = $(this).attr("data-id");
                 const idBarang = $(this).attr("data-id-arang");
@@ -59,6 +59,11 @@
                     &nbsp;
                     <a href="{{ route('barang.export') }}" class="btn btn-export btn-sm text-white"><i
                             class="fas fa-download mr-1"></i> Export
+                        Data
+                    </a>
+                    &nbsp;
+                    <a href="#" class="btn btn-import btn-sm text-white" data-toggle="modal"
+                        data-target="#importModalBarang"><i class="fas fa-upload mr-1"></i> Import
                         Data
                     </a>
                 </div>
@@ -289,61 +294,36 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
-@section('content')
-    <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Barang</h4>
-                <div class="d-flex justify-content-end">
-                    <button type="button" data-toggle="modal" data-target="#" class="btn btn-primary btn-sm"><i
-                            class="fas fa-plus mr-1"></i> Tambah
-                        Data
-                    </button>
-                    &nbsp;
-                    <button type="button" data-toggle="modal" data-target="#" class="btn btn-info btn-sm text-white"><i
-                            class="fas fa-print mr-1"></i> Cetak
-                        Data
-                    </button>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>ID Kategori</th>
-                                <th>Kategori</th>
-                                <th>Type</th>
-                                <th>Stok</th>
-                                <th>Satuan</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>123001</td>
-                                <td>Mouse</td>
-                                <td>Logitech G112</td>
-                                <td>12</td>
-                                <td>Unit</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>113001</td>
-                                <td>AC</td>
-                                <td>Daikin 12-DG</td>
-                                <td>4</td>
-                                <td>Unit</td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                    <!-- Import Modal -->
+                    <div class="modal fade" id="importModalBarang" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Import Data</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="{{ route('barang.import') }}" method="POST" id="importFormModalBarang"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <input type="file" name="file" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-primary">Import</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

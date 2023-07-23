@@ -11874,6 +11874,18 @@ fieldset:disabled .wizard > .actions a,
     border-color: #016f1f;
 }
 
+.btn-import {
+    color: #fff;
+    background-color: #07c038;
+    border-color: #07c038;
+}
+
+.btn-import:hover {
+    color: #fff;
+    background-color: #07ad33;
+    border-color: #07ad33;
+}
+
 .btn-info {
     color: #fff;
     background-color: #248afd;

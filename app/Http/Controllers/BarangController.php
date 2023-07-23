@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\BarangExport;
+use App\Imports\BarangImport;
 use App\Models\Barang;
 use App\Models\BarangKeluar;
 use App\Models\BarangMasuk;
@@ -66,6 +67,15 @@ class BarangController extends Controller
     }
 
     public function exportBarang() {
-        return Excel::download(new BarangExport, 'barang.xlsx');
+        return Excel::download(new BarangExport, 'Data-Barang.xlsx');
+    }
+
+    public function importBarang(Request $request) {
+        $file = $request->file('file');
+        $namaFile = $file->getClientOriginalName();
+        $file->move('DataBarang', $namaFile);
+
+        Excel::import(new BarangImport, public_path('DataBarang/'.$namaFile));
+        return redirect()->route('barang.index');
     }
 }

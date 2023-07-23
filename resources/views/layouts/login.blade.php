@@ -12,31 +12,50 @@
     <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-    <link rel="stylesheet" href="/vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" type="text/css" href="/js/select.dataTables.min.css">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="/images/logoPLN.png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
     <div class="container-scroller">
-        @include('partials.navbar')
-        <div class="container-fluid page-body-wrapper">
-            @include('partials.sidebar')
-            <div class="main-panel">
-                <div class="content-wrapper">
-                    @yield('content')
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="content-wrapper d-flex align-items-center auth px-0">
+                <div class="row w-100 mx-0">
+                    <div class="col-lg-4 mx-auto">
+                        <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                            <div class="brand-logo">
+                                <img src="/images/logoPLN-big.png" alt="logo">
+                            </div>
+                            <h4>Selamat Datang!</h4>
+                            <h6 class="font-weight-light">Masukan akun anda untuk memulai.</h6>
+                            <form action="{{ route('login') }}" class="pt-3" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-lg" name="email"
+                                        id="exampleInputEmail1" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-lg" name="password"
+                                        id="exampleInputPassword1" placeholder="Password">
+                                </div>
+                                <div class="mt-3">
+                                    <button type="submit"
+                                        class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">MASUK
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                @include('partials.footer')
             </div>
+            <!-- content-wrapper ends -->
         </div>
+        <!-- page-body-wrapper ends -->
     </div>
-
+    <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
