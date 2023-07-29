@@ -40,8 +40,10 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Kategori</h4>
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-center">
+                    <h4 class="card-title">Kategori</h4>
+                </div>
+                <div class="d-flex">
                     <button type="button" data-toggle="modal" data-target="#tambahModalKategori"
                         class="btn btn-primary btn-sm"><i class="fas fa-plus mr-1"></i> Tambah
                         Data</button>

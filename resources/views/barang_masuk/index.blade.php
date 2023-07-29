@@ -1,7 +1,38 @@
 {{-- {{ dd($barangMasuks) }} --}}
 @extends('layouts.app')
 @push('js')
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
     <script>
+        $(document).ready(function() {
+            $('#tabelBarang').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy',
+                    {
+                        extend: 'csv',
+                        title: 'Data Barang Masuk'
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        title: 'Data Barang Masuk'
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        title: 'Data Barang Masuk'
+                    },
+                    {
+                        extend: 'print',
+                        title: 'Data Barang Masuk'
+                    }
+                ]
+            });
+        });
         $(document).ready(function() {
             // edit modal
             $(`span[id^="edit-"]`).click(function(event) {
@@ -35,6 +66,10 @@
         });
     </script>
 @endpush
+@push('css')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+@endpush
 @section('content')
     @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -47,19 +82,17 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Barang Masuk</h4>
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-center">
+                    <h4 class="card-title">Barang Masuk</h4>
+                </div>
+                <div class="d-flex">
                     <button type="button" data-toggle="modal" data-target="#tambahModalBarangMasuk"
                         class="btn btn-primary btn-sm"><i class="fas fa-plus mr-1"></i> Tambah
                         Data</button>
-                    &nbsp;
-                    <button type="button" data-toggle="modal" data-target="#" class="btn btn-info btn-sm text-white"><i
-                            class="fas fa-print mr-1"></i> Cetak
-                        Data
-                    </button>
                 </div>
+                &nbsp;
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="tabelBarang">
                         <thead>
                             <tr>
                                 <th>No</th>
